@@ -1,0 +1,417 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Koninklijke Bibliotheek</title>
+    <meta name="locale" content="nl">
+    <base href="http://www.kb.nl/" />
+    <meta http-equiv="imagetoolbar" content="no">
+    <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+
+    <link rel="search" type="application/opensearchdescription+xml" title="kbsearch demo" href="http://www.kbresearch.nl/opensearch.xml" /> 
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles/home_screen.css" media="screen, handheld, tv, projection" type="text/css">
+    <!--[if lt IE 7]><link rel="stylesheet" href="styles/home_screen_ie6.css" type="text/css" media="screen" /><![endif]-->
+    <!--[if gt IE 6]><link rel="stylesheet" href="styles/home_screen_ie7.css" type="text/css" media="screen" /><![endif]-->
+    <script type="text/javascript" src="scripts/mootools-1.2.1-core-yc.js"></script>
+    <script type="text/javascript" src="scripts/mootools-1.2-more.js"></script>
+    <script type="text/javascript" src="scripts/home_carousel.js"></script>
+    <script type="text/javascript" src="scripts/home.js"></script>
+    <script type="text/javascript" src="scripts/home_classes.js"></script>
+    <script type="text/javascript">
+            var test1='first';
+            var req=new XMLHttpRequest();
+
+            function set_search(phrase) {
+                    document.getElementById('sug').style.display='none';
+                    document.getElementById('searchquery').value='"'+phrase.split(':')[0].split('/')[0].replace(/^\s+|\s+$/g, '')+'"';
+            }
+
+            function controll_keys(ev) {
+                arrows=((ev.which)||(ev.keyCode));
+
+                switch(arrows) {
+
+                 case 37:
+                   break;
+
+                 case 38:
+                   break;
+
+                 case 39:
+                   break;
+
+                 case 40:
+                   break;
+
+                  };
+            };
+
+
+            function auto(phrase) {
+
+
+                req.open('GET', 'http://www.kbresearch.nl/autocomplete.cgi?query='+phrase, true);
+                req.send(null);
+                document.getElementById('sug').style.display='block';
+
+                req.onreadystatechange  = function() {
+                        if(req.readyState  == 4) {
+                            var a=eval("(" + req.responseText + ")");
+                            for (i=0; i<=5;i=i+1) {
+                                document.getElementById('trterm'+i).style.display='none';
+                            }
+                            for (i=0; i<=5;i=i+1) {
+                                document.getElementById('trwork'+i).style.display='none';
+                            }
+                            for (i=0; i<=5;i=i+1) {
+                                document.getElementById('trperson'+i).style.display='none';
+                            }
+                            for (i=0; i< a.terms.length;i=i+1) {
+                                document.getElementById('trterm'+i).style.display='block';
+                                document.getElementById('term'+i).innerHTML="<div onclick=set_search(\""+a.terms[i]+"\") style='width:350px; display: block;color: #000000;'>&nbsp;&nbsp;"+a.terms[i]+"</div>";
+                            }
+                            for (i=0; i< a.persons.length;i=i+1) {
+                                document.getElementById('trperson'+i).style.display='block';
+                                document.getElementById('person'+i).innerHTML='<div onclick="set_search(\' '+String(a.persons[i])+' \')" style="width:350px; display: block;color: #000000">&nbsp;&nbsp;'+a.persons[i]+'</div>';
+                            };
+                            for (i=0; i< a.works.length;i=i+1) {
+                                document.getElementById('trwork'+i).style.display='block';
+                                document.getElementById('work'+i).innerHTML='<div onclick="set_search(\' '+String(a.works[i])+' \')" style="width:350px; display: block;color: #000000">&nbsp;&nbsp;'+a.works[i].split(':')[0].split('/')[0]+'</div>';
+                            };
+
+
+                        };
+                };
+            };
+
+            
+    </script>
+    <style type="text/css">
+        table, tr, td {
+            margin: 0px;
+            border-collapse: collapse;
+            z-index: 2 ;
+        }
+
+
+        td, th { 
+            border: none; 
+            margin: 0px;
+            padding: 0px;
+            margin-left: 0px;
+        }
+
+        .tborder-left {
+            border-style: none none none solid;
+            padding-left: 0px;
+            color: #000000;
+            background: 
+        }
+        
+
+        table#sug td {  background: #fffff; color: black ; z-index: 2  }
+        table#sug div:hover {  color: white; z-index: 2  }
+        table#sug td.tborder-left {  color: 00000; }
+        table#sug td.tborder-left:hover {  background-color: #ababab; color: white; }
+        table#sug td.tborder-left {  background-color: #ffffff; color: white; }
+        a.tborder-left:hover {  background-color: #2222aa; color: white; }
+
+    </style>
+
+
+  </head>
+
+  <body>
+    <div id="framework">
+
+      <div id="logo">
+        <img src="images/home_logo.png" alt="Logo KB">
+      </div>
+
+  <h1>Koninklijke Bibliotheek - Nationale bibliotheek van Nederland</h1>
+      
+      <div id="carousel">
+        <div id="carousel-image">
+          <img src="assets/images/fysiek/05.jpg" alt="" class="yellow">
+          <img src="assets/images/webexposities/07.jpg" alt="" class="red">
+          <img src="assets/images/dvvn/08.jpg" alt="" class="red">
+
+          <img src="assets/images/webexposities/17.jpg" alt="" class="blue">
+        </div>
+        <div id="carousel-control">
+          <div id="carousel-control-buttons">
+          </div>
+          
+
+         <div class="carousel-control-content">
+            <div class="ruler">
+              <hr>
+            </div>
+
+            <h3>Bezoek de KB</h3>
+            <a href="/red/kennismaken/index.html">Maak kennis met de KB</a>
+          </div>
+
+      
+ 
+           <div class="carousel-control-content">
+            <div class="ruler">
+              <hr>
+            </div>
+
+            <h3>Uit de KB collectie</h3>
+            <a href="/bladerboek/visboek/index.html">Het Visboek van Adriaen Coenen</a>
+          </div>
+
+          
+      
+          <div class="carousel-control-content">
+            <div class="ruler">
+              <hr>
+            </div>
+
+            <h3>De Verdieping van Nederland</h3>
+            <a href="http://www.deverdiepingvannederland.nl">
+            Geschreven portretten, <br/>50 onvergetelijke Nederlanders
+            </a>
+          </div>
+          
+          <div class="carousel-control-content">
+            <div class="ruler">
+              <hr>
+
+            </div>
+          <h3>Schatten uit de KB-collectie</h3>
+            <a href="/bladerboek/divisiekroniek/index.html">Divisiekroniek met illustraties<br>van Lucas van Leyden</a>
+          </div>          
+  
+          
+
+
+          
+          
+          
+        </div>
+         <div id="search">
+          <h2 id="h2-zoek">Zoek</h2>
+
+          <p>
+            in 6 miljoen items: 110 kilometer boeken, kranten en tijdschriften
+          </p>
+
+            <form action="http://kbresearch.nl/mobileSearch/search" method="get">
+            <div class="inputgroup" id="searchquery-inputgroup">
+
+              <label for="searchquery" id="label-searchquery">Zoekopdracht</label>
+              <input autocomplete="off" type="text" id="searchquery" name="query" value="Uw zoekopdracht" onFocus="if (test1=='first') {this.value='';test1='second'; };" autocomplete="off" onKeyUp="auto(this.value)" ><br>
+        
+            <table border="0" id='sug' style='position: absolute; margin-left: -58px; float: left;color: black; width:410px;border-size: 0px;' bgcolor="#ffffff" width="410">
+                <tr id="trterm0"   style="display: none;"><td width="70"><b>Termen</b></td><td class="tborder-left" id="term0"></td></tr>
+                <tr id="trterm1"   style="display: none;"><td width="70"></td><td class="tborder-left" id="term1"></td></tr>
+                <tr id="trterm2"   style="display: none;"><td width="70"></td><td class="tborder-left" id="term2"></td></tr>
+                <tr id="trterm3"   style="display: none;"><td width="70"></td><td class="tborder-left" id="term3"></td></tr>
+                <tr id="trterm4"   style="display: none;"><td width="70"></td><td class="tborder-left" id="term4"></td></tr>
+                <tr id="trterm5"   style="display: none;"><td width="70"></td><td class="tborder-left" id="term5"></td></tr>
+
+                <tr id="trperson0" style="display: none; margin-top: 1px;"><td width="70"><b>Personen</b></td><td class="tborder-left" id="person0"></td></tr>
+                <tr id="trperson1" style="display: none;"><td width="70"></td><td class="tborder-left" id="person1">&nbsp;</td></tr>
+                <tr id="trperson2" style="display: none;"><td width="70"></td><td class="tborder-left" id="person2"></td></tr>
+                <tr id="trperson3" style="display: none;"><td width="70"></td><td class="tborder-left" id="person3"></td></tr>
+                <tr id="trperson4" style="display: none;"><td width="70"></td><td class="tborder-left" id="person4"></td></tr>
+                <tr id="trperson5" style="display: none;"><td width="70"></td><td class="tborder-left" id="person5"></td></tr>
+
+                <tr id="trwork0"   style="display: none; margin-top: 1px;"><td width="70"><b>Werken</b></td><td class="tborder-left" id="work0"></td></tr>
+                <tr id="trwork1"   style="display: none;"><td width="70"></td><td class="tborder-left" id="work1">&nbsp;</td></tr>
+                <tr id="trwork2"   style="display: none;"><td width="70"></td><td class="tborder-left" id="work2"></td></tr>
+                <tr id="trwork3"   style="display: none;"><td width="70"></td><td class="tborder-left" id="work3"></td></tr>
+                <tr id="trwork4"   style="display: none;"><td width="70"></td><td class="tborder-left" id="work4"></td></tr>
+                <tr id="trwork5"   style="display: none;"><td width="70"></td><td class="tborder-left" id="work5"></td></tr>
+              </table>
+
+
+
+            </div>
+			
+            <div class="inputgroup" id="searchfilter-inputgroup" style="z-index: 1 ">
+              
+			  <input type="checkbox" name="materials[]" value="boek" id="filter-boeken" class="checkbox" checked>
+              <label for="filter-boeken" id="filter-boeken-label">Boeken</label>
+              <div id="filter-boeken-popup" class="search-popup">
+                Alle <strong>boeken</strong> uit de <br>- Wetenschappelijke collectie<br>- Het Depot van Nederlandse Publicaties <br>In het Depot zijn alle Nederlandse publicaties vanaf 1974 opgenomen; deze zijn in te zien maar niet uitleenbaar.
+              </div>
+            
+			  <input type="checkbox" name="materials[]" value="tijdschrift/serie"  id="filter-tijdschriften" class="checkbox" checked>
+              <label for="filter-tijdschriften" id="filter-tijdschriften-label">Tijdschriften</label>
+              <div id="filter-tijdschriften-popup" class="search-popup">
+                Alle <strong>tijdschriften</strong> uit de KB collectie <br>Tijdschriften zijn in te zien maar niet uitleenbaar.<br>Gebruik de <a href="http://portal.kb.nl/V/?func=find-ej-1">Digitale Bibliotheek</a> als u zoekt naar e-journals.
+              </div>
+              
+			  <input type="checkbox" name="materials[]" value="krant" id="filter-kranten" class="checkbox" checked>
+              <label for="filter-kranten" id="filter-kranten-label">Kranten</label>
+              <div id="filter-kranten-popup" class="search-popup">
+                Alle titels van <strong>kranten</strong> uit de KB collectie. De KB beschikt over de grootste collectie regionale, landelijke en buitenlandse kranten van Nederland. <br>Raadpleeg voor digitaal beschikbare kranten de <a href="/menu/kranten.html">krantenpagina</a>.
+              </div>
+              
+			  <input type="checkbox" name="materials[]" value="beeldmateriaal" id="filter-beeldmateriaal" class="checkbox" checked>
+              <label for="filter-beeldmateriaal" id="filter-beeldmateriaal-label">Beeldmateriaal</label>
+              <div id="filter-beeldmateriaal-popup" class="search-popup">
+                Al het digitaal beschikbare <strong>beeldmateriaal</strong> van de KB uit								  <a href="http://www.hetgeheugenvannederland.nl">Het Geheugen van Nederland</a>.
+              </div>
+              
+			  <input type="checkbox" name="materials[]" value="website" id="filter-website" class="checkbox" checked>
+              <label for="filter-website" id="filter-website-label">Website</label>
+              <div id="filter-website-popup" class="search-popup">
+                Alle <strong>webpagina's</strong> op deze website
+              </div>
+			  
+		  
+			  
+            </div>
+            <input type="submit" value="Zoeken" id="submit">
+          </form>
+          <div class="ruler">
+            <hr>
+          </div>
+          <div class="block">
+            <h3 id="h3-meerinformatiebronnen">Meer informatiebronnen</h3>
+            <ul>
+              <li><a href="/menu/catalogi.html">Catalogi &amp; informatiediensten</a></li>
+              <li><a href="/wegwijzers/index.html">Wegwijzers per vakgebied</a></li>
+            </ul>
+          </div>
+          <div class="block">
+            <h3 id="h3-voorkbpashouders">Voor KB-pashouders</h3>
+            <ul>
+              <li><a href="http://portal.kb.nl/pds?func=load-login&calling_system=metalib&institute=DNL&url=http://portal.kb.nl:80/V?func=meta-1&Init_type=QuickSetsList" target="_blank">Online bestanden &amp; e-tijdschriften</a></li>
+              <li><a href="http://192.87.31.188/LBSOpacLoan/startBorrowerInfo.jsp?USR=888&BES=1&LAN=NE" target="_blank">Verlengen &amp; leengegevens</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div id="maincontent">
+
+        <div id="block-actueel" class="block">
+          <h2 id="h2-actueel">Actueel</h2>
+		  <ul>
+		  	<li style="margin-bottom:8px"><a href="/nieuws/2010/sport_in_beeld.html">'Sport in beeld' bij de Koninklijke Bibliotheek</a></li>
+            <li style="margin-bottom:8px"><a href="/dossiers/vaderlandscheletteroefeningen/index.html">Vaderlandsche letteroefeningen</a></li>            
+            <li style="margin-bottom:8px"><a href="/pr/nieuwsbrief/201001/201001.html">KB Nieuwsbrief januari 2010</a></li>
+            <li style="margin-bottom:8px"><a href="/dossiers/waals/index.html">Dossier collaborateur Anton van der Waals</a></li>
+            <li style="margin-bottom:8px"><a href="/galerie/letters/v-mss/index.html">Column over letters: Fantasie in een middeleeuwse V</a></li>
+            <li style="margin-bottom:8px"><a href="/nieuws/2010/symposium_kranten.html">Symposium krantendigitalisering op 29 januari 2010</a></li>
+            <li style="margin-bottom:8px"><a href="/nieuws/2010/digitalisering_tijdschriften.html">KB digitaliseert tijdschriften</a></li>
+            <li style="margin-bottom:8px"><a href="/nieuws/2010/beleidsplan.html">Beleidsplan 2010-2013</a></li>
+            <li style="margin-bottom:8px"><a href="http://www.deverdiepingvannederland.nl">Tentoonstelling: Topstukken met een winters tintje</a></li>
+            <li style="margin-bottom:8px"><a href="/nieuws/index.html">Nieuwsarchief</a></li>
+          </ul>
+
+		  <a href="/rss.xml" id="rss-button">RSS</a>
+		  
+<!--		  	  
+          <h2 id="h2-agenda">Agenda</h2> 		  
+          <table id="agenda">
+            <tr>
+              <th>Datum</th>
+              <th>Omschrijving</th>
+            </tr>
+            <tr>
+              <td class="date">tot augustus</td>
+              <td><a href="http://www.deverdiepingvannederland.nl">Het Twaalfjarig bestand in De Verdieping van Nederland</a></td>
+            </tr>
+          </table>
+          <a href="/nieuws/2009/kalender_voorjaar/index.html" class="more">Activiteitenkalender  2009</a>
+<br/>
+-->
+
+
+
+        </div>
+		
+		
+
+        <div id="block-debibliotheek" class="block">
+          <h2 id="h2-debibliotheek">De bibliotheek</h2>
+
+		<ul>
+            <li><a href="/hpd/wegwijzer/adres.html">Adres en openingstijden</a></li>
+            <li><a href="/hpd/qp/qp.html">Stel uw vraag</a></li>
+            <li><a href="/red/kennismaken/index.html">Kennismaken met de KB</a></li>
+            <li><a href="/hpd/diensten/uitleen.html">Gebruik van de KB</a></li>
+            <li><a href="/hpd/kbpas/index.html">Aanvragen KB-pas</a></li>
+            <li><a href="/hpd/bestel/bestel.html">Bestellen artikelen, boeken en scans</a></li>
+          </ul>
+		  
+		  
+          <h2>&nbsp;</h2>
+          <ul>
+            <li><a href="/nieuws/nieuwsbrieven/nieuwsbrieven.html"><img src="assets/banners/banner-nieuwsbrief.jpg" alt="KB Nieuwsbrief - meld u nu aan"></a></li>
+          </ul>
+
+        </div>
+
+        <div id="block-exposities" class="block">
+          <h2 id="h2-expositiesencollecties">Exposities &amp; Collecties</h2>
+          <ul>
+            <li><a href="/menu/webexposities.html">Webexposities</a></li>
+            <li><a href="/dossiers/index.html">Dossiers</a></li>
+            <li><a href="/dichters/index.html">Dichter op het scherm</a></li>
+            <li><a href="/menu/collecties.html">Speciale collecties</a></li>
+			<li><a href="">&nbsp;</a></li>
+			<li><a href="">&nbsp;</a></li>
+          </ul>
+		  
+          <h2 id="h2-ookvandekb">Ook van de KB</h2>
+          <ul>
+            <li><a href="http://www.hetgeheugenvannederland.nl"><img src="assets/banners/banner-geheugenvannederland.jpg" alt="Geheugen van Nederland"></a></li>
+          </ul>
+        </div>
+
+        <div id="block-overdekb" class="block">
+          <h2 id="h2-overdekb">Over de KB</h2>
+          <ul>
+            <li><a href="/menu/org_beleid.html">Organisatie en beleid</a></li>
+            <li><a href="/pz/werken.html">Werken bij de KB</a></li>
+            <li><a href="/hrd/dd/index.html">e-Depot &amp; digitale duurzaamheid</a></li>
+            <li><a href="/hrd/digitalisering/index.html">Digitalisering</a></li>
+            <li><a href="/menu/conservering.html">Conservering</a></li>
+            <li><a href="/menu/speciaal_bibliotheken.html">Voor bibliotheken</a></li>
+            <li><a href="/menu/speciaal_uitgeverij.html">Voor uitgevers</a></li>
+            <li><a href="/pr/pers/info.html">Voor de pers</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div id="navigation">
+        <ul>
+          <li><a href="index-en.html">This page in English</a></li>
+          <li><a href="/hpd/qp/qp.html">Contact</a></li>
+          <li><a href="/site/sitemap.html">Sitemap</a></li>
+          <li><a href="javascript:window.print();">Printen</a></li>
+        </ul>
+      </div>
+      <div id="footer">
+        <a href="/red/kbsite.html">Copyright &amp; colofon</a>
+      </div>
+
+
+    </div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    <script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-1182836-3");
+pageTracker._setDomainName("www.kb.nl");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+  </body>
+
+</html>
