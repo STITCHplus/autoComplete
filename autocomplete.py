@@ -132,7 +132,6 @@ def main():
         if len(q) > 2:
             for item in term_suggestion(q.lower())+creator_suggestion(q.lower())+title_suggestion(q.lower()):
                 item=item.lower() 
-                item=item.replace("paus", "de paashaas")
                 if not item == q.lower():
                     list.append(item)
             list= [ q,  list ]
